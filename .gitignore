@@ -3,3 +3,7 @@ dist/
 *.log
 *.tsbuildinfo
 .playwright-mcp/
+README.md
+GUIA_DO_CODIGO.md
+~$IA_DO_CODIGO.md
+src/private/
