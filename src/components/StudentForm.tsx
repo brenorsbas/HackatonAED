@@ -41,8 +41,8 @@ export function StudentForm({ initialProfile, onSubmit, onCancel }: StudentFormP
           Identificação do aluno
         </h1>
         <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-          Esses dados serão gravados junto com o resultado quando você clicar em “Salvar resultado”,
-          permitindo que o professor visualize apenas diagnósticos reais.
+          Esses dados serão gravados junto com os resultados de outro alunos para analise do
+          professor.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">

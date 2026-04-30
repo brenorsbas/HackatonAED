@@ -47,20 +47,16 @@ export default function App() {
   function handleFinishDiagnostic(answers: StudentAnswer[]): void {
     const nextResult = calculateDiagnosticResult(answers, studentProfile);
     setResult(nextResult);
-    setSaveFeedback("");
+    saveResult(nextResult);
+    setSaveFeedback("Resultado salvo automaticamente para a visão do professor.");
     setView("result");
   }
 
-  function handleSaveResult(): void {
-    if (!result) {
-      return;
-    }
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
-    const nextClassResults = upsertClassResult(classResults, result);
+  function saveResult(nextResult: DiagnosticResult): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextResult));
+    const nextClassResults = upsertClassResult(classResults, nextResult);
     setClassResults(nextClassResults);
     localStorage.setItem(CLASS_RESULTS_STORAGE_KEY, JSON.stringify(nextClassResults));
-    setSaveFeedback("Resultado salvo para a visão do professor.");
   }
 
   function handleStartDiagnostic(): void {
@@ -80,6 +76,17 @@ export default function App() {
       localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
       return nextTheme;
     });
+  }
+
+  function handleDeleteResult(resultId: string): void {
+    const nextClassResults = classResults.filter((item) => item.id !== resultId);
+    setClassResults(nextClassResults);
+    localStorage.setItem(CLASS_RESULTS_STORAGE_KEY, JSON.stringify(nextClassResults));
+
+    if (result?.id === resultId) {
+      setResult(null);
+      localStorage.removeItem(STORAGE_KEY);
+    }
   }
 
   return (
@@ -142,12 +149,15 @@ export default function App() {
           <StudentResult
             result={result}
             onRetake={handleStartDiagnostic}
-            onSave={handleSaveResult}
             saveFeedback={saveFeedback}
           />
         )}
         {visibleView === "teacher" && (
-          <TeacherDashboard results={classResults} onStartDiagnostic={handleStartDiagnostic} />
+          <TeacherDashboard
+            results={classResults}
+            onDeleteResult={handleDeleteResult}
+            onStartDiagnostic={handleStartDiagnostic}
+          />
         )}
         {visibleView === "algorithm" && <AlgorithmExplanation />}
       </main>

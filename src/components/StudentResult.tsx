@@ -5,7 +5,6 @@ import { StudyPathCard } from "./StudyPathCard";
 interface StudentResultProps {
   result: DiagnosticResult;
   onRetake: () => void;
-  onSave: () => void;
   saveFeedback: string;
 }
 
@@ -21,7 +20,7 @@ function getTone(performance: TopicPerformance): "success" | "warning" | "danger
   return "danger";
 }
 
-export function StudentResult({ result, onRetake, onSave, saveFeedback }: StudentResultProps) {
+export function StudentResult({ result, onRetake, saveFeedback }: StudentResultProps) {
   return (
     <section className="py-10">
       <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
@@ -77,13 +76,6 @@ export function StudentResult({ result, onRetake, onSave, saveFeedback }: Studen
               className="rounded-lg border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500"
             >
               Refazer diagnóstico
-            </button>
-            <button
-              type="button"
-              onClick={onSave}
-              className="rounded-lg bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 dark:bg-teal-400 dark:text-slate-950 dark:hover:bg-teal-300 dark:focus:ring-offset-slate-950"
-            >
-              Salvar resultado
             </button>
             {saveFeedback && <span className="text-sm font-medium text-teal-700">{saveFeedback}</span>}
           </div>

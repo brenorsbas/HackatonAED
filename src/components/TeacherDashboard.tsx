@@ -4,6 +4,7 @@ import { ProgressBar } from "./ProgressBar";
 
 interface TeacherDashboardProps {
   results: DiagnosticResult[];
+  onDeleteResult: (resultId: string) => void;
   onStartDiagnostic: () => void;
 }
 
@@ -13,7 +14,11 @@ interface ProblemTopic {
   average: number;
 }
 
-export function TeacherDashboard({ results, onStartDiagnostic }: TeacherDashboardProps) {
+export function TeacherDashboard({
+  results,
+  onDeleteResult,
+  onStartDiagnostic,
+}: TeacherDashboardProps) {
   const hasResults = results.length > 0;
   const classAverage = hasResults
     ? Math.round(results.reduce((sum, result) => sum + result.overallPercentage, 0) / results.length)
@@ -32,8 +37,7 @@ export function TeacherDashboard({ results, onStartDiagnostic }: TeacherDashboar
             Painel do professor
           </h1>
           <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
-            Esta visão usa apenas resultados reais salvos neste navegador. Sem simulação e sem
-            backend.
+            Painel acessado pelos professores pra analise de desempenho.
           </p>
         </div>
         <button
@@ -91,6 +95,7 @@ export function TeacherDashboard({ results, onStartDiagnostic }: TeacherDashboar
                       <th className="px-4 py-3 font-semibold">Curso</th>
                       <th className="px-4 py-3 font-semibold">Média</th>
                       <th className="px-4 py-3 font-semibold">Data</th>
+                      <th className="px-4 py-3 font-semibold">Ação</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -107,6 +112,15 @@ export function TeacherDashboard({ results, onStartDiagnostic }: TeacherDashboar
                         </td>
                         <td className="px-4 py-3 text-slate-600 dark:text-slate-300">
                           {formatDate(result.createdAt)}
+                        </td>
+                        <td className="px-4 py-3">
+                          <button
+                            type="button"
+                            onClick={() => onDeleteResult(result.id)}
+                            className="rounded-lg border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-700 transition hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-400 dark:border-rose-500/40 dark:text-rose-200 dark:hover:bg-rose-950/30"
+                          >
+                            Apagar
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -138,8 +152,8 @@ function EmptyTeacherState({ onStartDiagnostic }: { onStartDiagnostic: () => voi
         Nenhum resultado real salvo ainda
       </h2>
       <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
-        Peça para um aluno preencher nome e curso, concluir o diagnóstico e clicar em “Salvar
-        resultado”. Depois disso, os dados aparecerão neste painel.
+        Peça para um aluno preencher nome e curso e concluir o diagnóstico. Depois disso, os dados
+        aparecerão automaticamente neste painel.
       </p>
       <button
         type="button"

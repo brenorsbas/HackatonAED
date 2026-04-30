@@ -80,44 +80,22 @@ export function Home({ onStartDiagnostic, onOpenTeacherDashboard }: HomeProps) {
                 </p>
               </div>
             ))}
-            <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-950/30">
-              <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">Importante</p>
-              <p className="mt-1 text-sm leading-6 text-amber-800 dark:text-amber-100">
-                A visão do professor fica vazia até um aluno salvar um diagnóstico real.
-              </p>
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-4 pb-10 md:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-          <p className="text-sm font-semibold text-slate-950 dark:text-white">Para professores</p>
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            {[
-              ["Fonte", "localStorage"],
-              ["Dados", "reais"],
-              ["Modo", "sem demo"],
-            ].map(([label, value]) => (
-              <div key={label} className="rounded-lg bg-slate-50 p-4 dark:bg-slate-950/70">
-                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">{label}</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <section className="pb-10">
+        <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
           <p className="text-sm font-semibold text-slate-950 dark:text-white">
             Como o CalcPath funciona
           </p>
-          <div className="mt-4 grid gap-3 text-sm text-slate-600 md:grid-cols-4 dark:text-slate-300">
+          <div className="mt-4 grid gap-4 text-sm text-slate-600 md:grid-cols-4 dark:text-slate-300">
             {["Diagnóstico", "Grafo", "Score", "Rota"].map((step, index) => (
-              <div key={step} className="rounded-lg bg-slate-50 p-4 dark:bg-slate-950/70">
+              <div key={step} className="rounded-lg bg-slate-50 p-6 dark:bg-slate-950/70">
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-teal-100 text-xs font-bold text-teal-700 dark:bg-teal-400/15 dark:text-teal-200">
                   {index + 1}
                 </span>
-                <p className="mt-3 font-semibold text-slate-900 dark:text-white">{step}</p>
+                <p className="mt-4 text-base font-semibold text-slate-900 dark:text-white">{step}</p>
               </div>
             ))}
           </div>
